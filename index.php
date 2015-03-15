@@ -68,6 +68,7 @@ echo '<br/>';
 if (isset($_POST)){ // If submit pressed
 if (isset($_POST["delete"])){
 // echo 'Delete Pressed!';
+echo 'Delete Button Pressed!';
 $delid = $_POST["delete"];
 del_table("ID = $delid", "Russ", "russ.db");
 }
@@ -98,7 +99,7 @@ if (isset($_POST['submit-add'])){
 	   // query_table("SELECT * FROM $TABLE", "Russ", 'russ.db');
 		$db = new PDO('sqlite:' . $database);
 		// $db->exec("CREATE TABLE Russ (Id INTEGER PRIMARY KEY, Breed TEXT, Name TEXT, Age INTEGER)");    
-		echo "<table border=1>";
+		echo '<table border="1"><form method="post">';
 		echo "<tr><td>Id</td><td>Breed</td><td>Name</td><td>Age</td></tr>";
     foreach($results as $row)
     {
@@ -106,10 +107,14 @@ if (isset($_POST['submit-add'])){
       echo '<td>'.$row['Breed'].'</td>';
       echo '<td>'.$row['Name'].'</td>';
       echo '<td>'.$row['Age'].'</td>';
-	  echo '<td><form method="post"><button type="submit" name="delete" value="' . $row['Id'] . '">Delete</button></form></td>';
+	  //echo '<td><form method="post"><button type="submit" name="delete" value="' . $row['Id'] . '">Delete</button></form></td>';
+	  echo '<td><input type="checkbox" name="deletebox[]" value="' . $row['Id'] . '"></td>';
 	  echo '</tr>';
     }
-    echo "</table>";
+    echo '';
+	echo "</table>";
 	var_export($_POST);
 ?>
+<input type="submit" type="submit" name="delete" value="Delete">
+</form>
 </html>
